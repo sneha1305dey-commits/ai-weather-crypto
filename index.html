@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gemini Agent | Weather & Crypto</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Markdown parser for clean AI formatting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="chat-wrapper">
+    <header>
+      <div class="header-info">
+        <h2>AI Assistant</h2>
+        <span class="badge">Weather & Crypto Agent</span>
+      </div>
+      <button id="reset-btn" title="Clear chat history">New Chat</button>
+    </header>
+
+    <main id="chat-container">
+      <div class="message bot welcome">
+        <h3>Hey there! 👋</h3>
+        <p>Ask me anything about current weather conditions or live crypto coin prices.</p>
+      </div>
+    </main>
+
+    <div id="input-container">
+      <form id="chat-form">
+        <input 
+          type="text" 
+          id="user-input" 
+          placeholder="Ask e.g. 'What is the price of Bitcoin in INR?' or 'Weather in Paris'" 
+          autocomplete="off" 
+          required 
+        />
+        <button type="submit" id="send-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
