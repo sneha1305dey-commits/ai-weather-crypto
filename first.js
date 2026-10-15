@@ -6,7 +6,11 @@ import 'dotenv/config';
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Serves index.html, style.css, script.js
+app.use(express.static('.'));
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: '.' });
+});
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
