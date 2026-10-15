@@ -14,14 +14,14 @@ app.get('/', (req, res) => {
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// In-memory conversation history per session
+
 const sessions = new Map();
 
-// --- Tool Implementations ---
+
 async function cryptoCurrency({ coin }) {
   try {
     const formattedCoin = coin.toLowerCase().trim();
-    // FIX: baseUrl define kiya gaya hai
+
     const baseUrl = process.env.COINGECKO_API_URL;
 
     const response = await fetch(
@@ -49,7 +49,7 @@ async function cryptoCurrency({ coin }) {
 async function weatherInformation({ city }) {
   try {
     const apiKey = process.env.WEATHER_API_KEY;
-    // FIX: baseUrl define kiya gaya hai
+
     const baseUrl = process.env.WEATHER_API_URL;
 
     const response = await fetch(
@@ -75,7 +75,7 @@ async function weatherInformation({ city }) {
   }
 }
 
-// --- Gemini Tool Declarations ---
+
 const cryptoInfo = {
   name: 'cryptoCurrency',
   description: 'Get current price and 24h market stats for cryptocurrencies like bitcoin, ethereum, solana, etc.',
@@ -112,7 +112,7 @@ const toolFunctions = {
   weatherInformation
 };
 
-// --- Agent Execution Loop ---
+
 async function runAgent(history, userMessage) {
   history.push({
     role: 'user',
@@ -139,7 +139,7 @@ async function runAgent(history, userMessage) {
       return 'Sorry, I could not generate a response. Please try again.';
     }
 
-    // Check if Gemini requested function execution
+
     if (result.functionCalls && result.functionCalls.length > 0) {
       history.push(candidate.content);
 
@@ -175,7 +175,7 @@ async function runAgent(history, userMessage) {
   return 'I completed the actions, but reached the maximum tool reasoning steps.';
 }
 
-// --- Chat API Endpoint ---
+
 app.post('/api/chat', async (req, res) => {
   try {
     const { message, sessionId = 'default' } = req.body;
@@ -196,7 +196,7 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Clear Session / Reset Chat
+
 app.post('/api/reset', (req, res) => {
   const { sessionId = 'default' } = req.body;
   sessions.delete(sessionId);
